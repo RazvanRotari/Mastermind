@@ -12,23 +12,21 @@ struct StrategyItem {
     StrategyItem(const BWAPI::UnitType _unitType, std::vector<StrategyItem> _children, const bool _loop = false)
         : unitType(_unitType), loop(_loop), morphChildren(_children) {}
 
-    /* StrategyItem(BWAPI::UnitType _unitType, */
-    /*              std::vector<BWAPI::UnitType> _children) */
-    /*     : unitType(_unitType) { */
-    /*     for (auto type : _children) { */
-    /*         children.push_back(type); */
-    /*     } */
-    /* } */
-
     StrategyItem(BWAPI::UnitType _unitType) : unitType(_unitType) {}
 
-    void addChildren(const StrategyItem& children);
+    void addChild(const StrategyItem& children);
+    void removeChild(const int index);
+
     BWAPI::UnitType unitType;
-    bool executed = false;
-    bool completed = false;
     bool loop = false;
     bool autoWorker = false;
+    bool attack = false;
+
+    //Internal uses - this will not be serialized
+    bool executed = false;
+    bool completed = false;
     bool morph = false;
+
     std::vector<StrategyItem> children;
     std::vector<StrategyItem> morphChildren;
 };

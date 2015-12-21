@@ -2,9 +2,13 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
-SOURCES += main.cpp
+CONFIG += c++14
 
-RESOURCES += qml.qrc
+SOURCES += src/*.cpp
+
+RESOURCES += qml/qml.qrc
+DESTDIR = bin/
+OBJECTS_DIR = bin/
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

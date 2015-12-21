@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../src/StrategyItem.h"
+#include "StrategyItem.hpp"
 
 using namespace BWAPI;
 
@@ -11,9 +11,25 @@ TEST(StrategyItem, Construct) {
     ASSERT_EQ(type, a.unitType);
 }
 
+TEST(StrategyItem, ConstructWithItems) {
+    auto type = UT::Zerg_Drone;
+    StrategyItem a(type, {type});
+    ASSERT_EQ(a.morphChildren.size(), 1);
+}
+
 TEST(StrategyItem, Add) {
     auto type = UnitTypes::Zerg_Drone;
-    StrategyItem a(type, {UnitTypes::Zerg_Drone});
+    StrategyItem a(type);
+    a.addChild(type);
+    ASSERT_EQ(a.morphChildren.size(), 1);
+}
+
+TEST(StrategyItem, RemoveIndex) {
+    auto type = UT::Zerg_Drone;
+    StrategyItem a(type);
+    a.addChild(type);
+    a.removeChild(0);
+    ASSERT_EQ(a.morphChildren.size(), 0);
 }
 
 int main(int argc, char **argv) {

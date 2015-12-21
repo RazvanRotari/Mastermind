@@ -8,7 +8,7 @@ solution "MyApplication"
    -- A project defines one build target
    project "BuildTree"
       kind "StaticLib"
-      files { "src/**.h", "src/**.cpp" }
+      files { "src/**.hpp", "src/**.cpp" }
 
       configuration "Debug"
          defines { "DEBUG" }
@@ -21,7 +21,7 @@ solution "MyApplication"
     project "test"
         kind "ConsoleApp"
         links { "gtest", "BuildTree" }
-        files { "tests/**.h", "tests/**.cpp" }
+        files { "tests/**.hpp", "tests/**.cpp" }
         includedirs { "src/" }
 
       configuration "Debug"
